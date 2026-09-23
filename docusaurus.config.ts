@@ -37,14 +37,14 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/barklarm/barklarm-website/tree/main/',
+            'https://github.com/alvarolorentedev/barklarm-website/tree/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/barklarm/barklarm-website/tree/main/',
+            'https://github.com/alvarolorentedev/barklarm-website/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -74,7 +74,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/barklarm',
+          href: 'https://github.com/alvarolorentedev',
           label: 'GitHub',
           position: 'right',
         },
@@ -110,7 +110,7 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/barklarm',
+              href: 'https://github.com/alvarolorentedev',
             },
             {
               label: 'Privacy Policy',
