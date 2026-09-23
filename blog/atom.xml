@@ -14,7 +14,7 @@
         <updated>2021-05-11T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Hello welcome everyone to the first blog post and also our first Alpha release.]]></summary>
         <content type="html"><![CDATA[<p>Hello welcome everyone to the first blog post and also our first Alpha release.</p>
-<p>The release can be found in this <a href="https://github.com/barklarm/barklarm-app/releases/tag/v1.0.2" target="_blank" rel="noopener noreferrer">link</a></p>
+<p>The release can be found in this <a href="https://github.com/alvarolorentedev/barklarm-app/releases/tag/v1.0.2" target="_blank" rel="noopener noreferrer">link</a></p>
 <p>The set of features this contains is:</p>
 <ul>
 <li>Support for github Actions</li>
@@ -22,7 +22,7 @@
 <li>Global state as a tray icon</li>
 <li>Individual build states in the menu of the tray icon.</li>
 </ul>
-<p>We hope you enjoy and we look forward to your feedback and help in our <a href="https://github.com/barklarm/barklarm-app" target="_blank" rel="noopener noreferrer">repository</a></p>]]></content>
+<p>We hope you enjoy and we look forward to your feedback and help in our <a href="https://github.com/alvarolorentedev/barklarm-app" target="_blank" rel="noopener noreferrer">repository</a></p>]]></content>
         <author>
             <name>kanekotic</name>
             <uri>https://github.com/kanekotic</uri>
