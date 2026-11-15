@@ -21,7 +21,10 @@ Let's discover **Barklarm in less than 120 seconds**.
   <TabItem value="osx" label="OSX" default>
     ```bash
         # Using brew
-        brew install --cask barklarm/barklarm/barklarm
+        brew tap alvarolorentedev/tap
+        # Homebrew 7 or later require trusting the tap
+        brew trust --tap alvarolorentedev/tap
+        brew install --cask alvarolorentedev/tap/barklarm
     ```
   </TabItem>
   <TabItem value="windows" label="Windows">
