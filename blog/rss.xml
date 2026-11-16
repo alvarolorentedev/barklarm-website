@@ -1,30 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-    <channel>
-        <title>Barklarm Blog</title>
-        <link>https://www.barklarm.com/blog</link>
-        <description>Barklarm Blog</description>
-        <lastBuildDate>Tue, 11 May 2021 00:00:00 GMT</lastBuildDate>
-        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
-        <generator>https://github.com/jpmonette/feed</generator>
-        <language>en</language>
-        <item>
-            <title><![CDATA[First Alpha Release]]></title>
-            <link>https://www.barklarm.com/blog/first-alpha-release</link>
-            <guid>https://www.barklarm.com/blog/first-alpha-release</guid>
-            <pubDate>Tue, 11 May 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Hello welcome everyone to the first blog post and also our first Alpha release.]]></description>
-            <content:encoded><![CDATA[<p>Hello welcome everyone to the first blog post and also our first Alpha release.</p>
-<p>The release can be found in this <a href="https://github.com/alvarolorentedev/barklarm-app/releases/tag/v1.0.2" target="_blank" rel="noopener noreferrer">link</a></p>
-<p>The set of features this contains is:</p>
-<ul>
-<li>Support for github Actions</li>
-<li>Notifications</li>
-<li>Global state as a tray icon</li>
-<li>Individual build states in the menu of the tray icon.</li>
-</ul>
-<p>We hope you enjoy and we look forward to your feedback and help in our <a href="https://github.com/alvarolorentedev/barklarm-app" target="_blank" rel="noopener noreferrer">repository</a></p>]]></content:encoded>
-            <category>release</category>
-        </item>
-    </channel>
-</rss>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Barklarm Blog</title><description>Release notes and updates from Barklarm.</description><link>https://www.barklarm.com/</link><item><title>First Alpha Release</title><link>https://www.barklarm.com/blog/first-alpha-release/</link><guid isPermaLink="true">https://www.barklarm.com/blog/first-alpha-release/</guid><description>The first alpha release of Barklarm introduced GitHub Actions monitoring, tray status, and notifications.</description><pubDate>Tue, 11 May 2021 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Hello welcome everyone to the first blog post and also our first Alpha release.&lt;/p&gt;
+&lt;p&gt;The release can be found in this &lt;a href=&quot;https://github.com/alvarolorentedev/barklarm-app/releases/tag/v1.0.2&quot;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The set of features this contains is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for github Actions&lt;/li&gt;
+&lt;li&gt;Notifications&lt;/li&gt;
+&lt;li&gt;Global state as a tray icon&lt;/li&gt;
+&lt;li&gt;Individual build states in the menu of the tray icon.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We hope you enjoy and we look forward to your feedback and help in our &lt;a href=&quot;https://github.com/alvarolorentedev/barklarm-app&quot;&gt;repository&lt;/a&gt;&lt;/p&gt;</content:encoded><category>release</category></item></channel></rss>

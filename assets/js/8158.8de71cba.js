@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbarklarm_website=self.webpackChunkbarklarm_website||[]).push([[8158],{8158:(a,e,r)=>{r.r(e),r.d(e,{DocSearchModal:()=>s.a1});var s=r(3219)}}]);
