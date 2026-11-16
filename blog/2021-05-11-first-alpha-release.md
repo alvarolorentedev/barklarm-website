@@ -1,6 +1,8 @@
 ---
 slug: first-alpha-release
 title: First Alpha Release
+description: The first alpha release of Barklarm introduced GitHub Actions monitoring, tray status, and notifications.
+date: 2021-05-11
 authors: kanekotic
 tags: [release]
 ---

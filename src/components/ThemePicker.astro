@@ -1,0 +1,50 @@
+---
+import Monitor from '@phosphor-icons/core/bold/monitor-bold.svg';
+import Sun from '@phosphor-icons/core/bold/sun-bold.svg';
+import Moon from '@phosphor-icons/core/bold/moon-bold.svg';
+
+const themes = [
+  { value: 'auto', label: 'System', Icon: Monitor },
+  { value: 'light', label: 'Light', Icon: Sun },
+  { value: 'dark', label: 'Dark', Icon: Moon },
+];
+---
+
+<fieldset data-color-theme aria-label="Color theme" hidden>
+  {themes.map(({ value, label, Icon }) => (
+    <label title={label}>
+      <input type="radio" name="color-theme" value={value} aria-label={label} checked={value === 'auto'} />
+      <span class="theme-icon"><Icon aria-hidden="true" focusable="false" /></span>
+    </label>
+  ))}
+</fieldset>
+
+<style>
+  fieldset[hidden] { display: none; }
+  fieldset {
+    display: inline-flex;
+    flex: none;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 2px;
+    border: 1px solid var(--control-border, var(--sl-color-gray-4));
+    border-radius: .75rem;
+    background: var(--surface, var(--sl-color-bg-nav));
+  }
+  label { position: relative; cursor: pointer; }
+  input { position: absolute; inline-size: 1px; block-size: 1px; margin: 0; opacity: 0; }
+  .theme-icon {
+    display: grid;
+    place-items: center;
+    inline-size: 2.25rem;
+    block-size: 2.375rem;
+    border-radius: .55rem;
+  }
+  .theme-icon svg { width: 1rem; height: 1rem; }
+  label:hover .theme-icon { background: var(--lavender, var(--sl-color-accent-low)); }
+  input:checked + .theme-icon { color: #fff; background: var(--button-bg, #863ba3); }
+  input:focus-visible + .theme-icon { outline: 2px solid var(--purple, var(--sl-color-accent)); outline-offset: 1px; }
+  @media (max-width: 380px) {
+    .theme-icon { inline-size: 1.75rem; }
+  }
+</style>

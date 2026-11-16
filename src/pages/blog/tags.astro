@@ -1,0 +1,14 @@
+---
+import Site from '../../layouts/Site.astro';
+import { posts } from '../../lib/blog';
+const tags = [...new Set((await posts()).flatMap(({ data }) => data.tags))].sort();
+---
+<Site title="Blog tags" description="Browse topics covered in Barklarm’s blog and release notes.">
+  <section class="reading">
+    <nav class="utility-nav" aria-label="Breadcrumb"><a href="/blog">Blog</a></nav>
+    <h1>Blog tags</h1>
+    <ul>
+      {tags.map(tag => <li><a href={`/blog/tags/${tag}`}>{tag}</a></li>)}
+    </ul>
+  </section>
+</Site>

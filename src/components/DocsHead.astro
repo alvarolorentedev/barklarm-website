@@ -1,0 +1,28 @@
+---
+import DefaultHead from '@astrojs/starlight/components/Head.astro';
+import Analytics from './Analytics.astro';
+import { canonicalPath, socialImage, socialImageAlt } from '../lib/site';
+
+const path = canonicalPath(Astro.url.pathname);
+const { title } = Astro.locals.starlightRoute.entry.data;
+const image = new URL(socialImage, Astro.site).href;
+const crumbs = [
+  { label: 'Barklarm', href: '/' },
+  ...(path === '/docs/intro' ? [] : [{ label: 'Docs', href: '/docs/intro' }]),
+  { label: title, href: path },
+];
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map(({ label, href }, i) => ({
+    '@type': 'ListItem', position: i + 1, name: label, item: new URL(href, Astro.site).href,
+  })),
+};
+---
+<DefaultHead />
+<meta property="og:image" content={image} />
+<meta property="og:image:alt" content={socialImageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="search" type="application/opensearchdescription+xml" title="Barklarm" href="/opensearch.xml" />
+<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+<Analytics />

@@ -1,0 +1,44 @@
+---
+import Site from '../layouts/Site.astro';
+---
+<Site title="Search" description="Find Barklarm setup guides, integrations, and release notes." noindex>
+  <section class="reading">
+    <h1>Search Barklarm</h1>
+    <p class="lede">Find setup guides, integrations, and release notes.</p>
+    <div id="search"></div>
+    <noscript>Search requires JavaScript. You can browse the <a href="/docs/intro">documentation</a> directly.</noscript>
+  </section>
+  <link slot="head" rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js" defer></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const clean = url => url.replace(/(?:\/index)?\.html(?=[?#]|$)/, '') || '/';
+      const query = new URLSearchParams(location.search).get('q');
+      if (typeof PagefindUI !== 'function') {
+        const message = document.createElement('p');
+        message.textContent = 'Search is available in the production build.';
+        document.getElementById('search').append(message);
+        return;
+      }
+      const search = new PagefindUI({
+        element: '#search',
+        showImages: false,
+        processResult(result) {
+          result.url = clean(result.url);
+          for (const match of result.sub_results) match.url = clean(match.url);
+        }
+      });
+      if (query) search.triggerSearch(query);
+    });
+  </script>
+</Site>
+
+<style>
+  #search {
+    --pagefind-ui-primary: var(--purple-deep);
+    --pagefind-ui-text: var(--ink);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--control-border);
+    --pagefind-ui-tag: var(--lavender);
+  }
+</style>

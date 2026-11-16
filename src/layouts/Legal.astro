@@ -1,0 +1,14 @@
+---
+import Site from './Site.astro';
+
+const { title, description } = Astro.props.frontmatter;
+---
+<Site {title} {description}>
+  <article class="reading">
+    <h1>{title}</h1>
+    <div class="prose legal-copy"><slot /></div>
+  </article>
+</Site>
+<style>
+  .legal-copy { margin-top: 1.65rem; }
+</style>

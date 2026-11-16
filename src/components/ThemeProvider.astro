@@ -1,0 +1,50 @@
+<script is:inline>
+  (() => {
+    const key = 'starlight-theme';
+    const system = window.matchMedia('(prefers-color-scheme: dark)');
+    const root = document.documentElement;
+
+    const read = () => {
+      try {
+        const saved = localStorage.getItem(key);
+        if (saved === 'light' || saved === 'dark') return saved;
+      } catch {}
+      return 'auto';
+    };
+
+    let preference = read();
+    const apply = () => {
+      root.dataset.theme = preference === 'auto'
+        ? (system.matches ? 'dark' : 'light')
+        : preference;
+    };
+
+    apply();
+    system.addEventListener('change', apply);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const picker = document.querySelector('[data-color-theme]');
+      if (!picker) return;
+      const updatePicker = () => {
+        picker.querySelector(`input[value="${preference}"]`).checked = true;
+      };
+      updatePicker();
+      picker.hidden = false;
+      picker.addEventListener('change', event => {
+        preference = event.target.value;
+        apply();
+        try {
+          if (preference === 'auto') localStorage.removeItem(key);
+          else localStorage.setItem(key, preference);
+        } catch {}
+      });
+
+      window.addEventListener('storage', event => {
+        if (event.key !== key && event.key !== null) return;
+        preference = read();
+        updatePicker();
+        apply();
+      });
+    });
+  })();
+</script>

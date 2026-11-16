@@ -1,0 +1,16 @@
+---
+import DefaultTitle from '@astrojs/starlight/components/PageTitle.astro';
+const { title, description } = Astro.locals.starlightRoute.entry.data;
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <a href="/docs/intro">Docs</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">{title}</span>
+</nav>
+<DefaultTitle />
+{description && <p class="docs-lede">{description}</p>}
+<style>
+  .breadcrumbs { display: flex; gap: .6rem; margin-top: .65rem; font-size: .875rem; }
+  .breadcrumbs a { color: var(--sl-color-text-accent); text-underline-offset: .15em; }
+  .docs-lede { margin-top: .55rem; color: var(--sl-color-gray-2); font-size: 1.1rem; max-width: 68ch; }
+</style>

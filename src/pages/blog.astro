@@ -1,0 +1,18 @@
+---
+import Site from '../layouts/Site.astro';
+import PostList from '../components/PostList.astro';
+import { posts } from '../lib/blog';
+const entries = await posts();
+---
+<Site title="Blog" description="Read release notes and updates from Barklarm, the open source desktop app for CI builds and monitoring alerts.">
+  <section class="reading">
+    <h1>Blog</h1>
+    <p class="lede">Release notes and updates from Barklarm.</p>
+    <nav class="utility-nav" aria-label="Blog navigation">
+      <a href="/blog/archive">Archive</a>
+      <a href="/blog/tags/release">Release tag</a>
+      <a href="/blog/rss.xml">RSS</a>
+    </nav>
+    <PostList {entries} />
+  </section>
+</Site>

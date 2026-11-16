@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Glyph from './Glyph.astro';
+import { displayDate, postPath } from '../lib/blog';
+
+const { entries } = Astro.props as { entries: CollectionEntry<'blog'>[] };
+---
+<div class="post-list">
+  {entries.map(({ data: { date, title, slug, authors, description } }) => (
+    <article class="post-entry">
+      <time class="article-meta" datetime={date.toISOString()}>{displayDate(date)}</time>
+      <h2><a href={postPath(slug)}>{title}</a></h2>
+      <p class="article-meta">By {authors}</p>
+      <p>{description}</p>
+      <a class="jump-link" href={postPath(slug)} aria-label={`Read ${title}`}>Read the post <Glyph name="right-arrow" /></a>
+    </article>
+  ))}
+</div>

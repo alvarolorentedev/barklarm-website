@@ -1,0 +1,90 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '../styles/site.css';
+import Analytics from '../components/Analytics.astro';
+import Brand from '../components/Brand.astro';
+import Glyph from '../components/Glyph.astro';
+import ThemePicker from '../components/ThemePicker.astro';
+import ThemeProvider from '../components/ThemeProvider.astro';
+import { canonicalPath, nav, repositoryUrl, socialImage, socialImageAlt } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  article?: boolean;
+  schema?: object;
+}
+const { title, description, noindex, article, schema } = Astro.props;
+const path = canonicalPath(Astro.url.pathname);
+const canonical = new URL(path, Astro.site);
+const fullTitle = `${title} | Barklarm`;
+const image = new URL(socialImage, Astro.site);
+const isCurrent = (href: string) => path === href || (href === '/blog' && path.startsWith('/blog/'));
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <ThemeProvider />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/img/favicon.ico" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Barklarm" href="/opensearch.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Barklarm Blog" href="/blog/rss.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Barklarm Blog" href="/blog/atom.xml" />
+    <meta property="og:site_name" content="Barklarm" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
+    <slot name="head" />
+    <Analytics />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <Brand />
+        <div class="header-actions">
+          <nav class="desktop-nav" aria-label="Main navigation">
+            {nav.map(({ label, href }) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}
+            <a class="button github-button" href={repositoryUrl}>GitHub <Glyph name="external" /></a>
+          </nav>
+          <ThemePicker />
+          <details class="mobile-nav">
+            <summary aria-label="Main navigation"><Glyph name="bars" /></summary>
+            <nav aria-label="Main navigation">
+              {nav.map(({ label, href }) => <a href={href} aria-current={isCurrent(href) ? 'page' : undefined}>{label}</a>)}
+              <a href={repositoryUrl}>GitHub <Glyph name="external" /></a>
+            </nav>
+          </details>
+        </div>
+      </div>
+    </header>
+    <main id="main-content" data-pagefind-body data-pagefind-ignore={noindex || undefined}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <Brand />
+        <nav aria-label="Footer navigation">
+          <a href="/docs/intro">Docs</a>
+          <a href="/blog">Blog</a>
+          <a href={repositoryUrl}>GitHub</a>
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms-and-conditions">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

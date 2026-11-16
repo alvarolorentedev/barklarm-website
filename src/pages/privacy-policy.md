@@ -1,4 +1,8 @@
-**Privacy Policy**
+---
+layout: ../layouts/Legal.astro
+title: "Privacy Policy"
+description: "Read the Barklarm app and website privacy policy."
+---
 
 Kanekotic built the Barklarm app as an Open Source app. This SERVICE is provided by Kanekotic at no cost and is intended for use as is.
 

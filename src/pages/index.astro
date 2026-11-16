@@ -1,0 +1,196 @@
+---
+import Site from '../layouts/Site.astro';
+import Glyph from '../components/Glyph.astro';
+import { integrations, releaseUrl, repositoryUrl } from '../lib/site';
+
+const title = 'CI and monitoring alerts on your desktop';
+const description = 'Barklarm is a free, open-source desktop app for CI build status and monitoring alerts. Connect GitHub Actions, Datadog, Sentry, and more.';
+// shortcut: Astro's video types omit loading; remove the spread when those types catch up.
+const videoLoading = { loading: 'lazy' };
+const steps = [
+  { title: 'Connect your tools', text: 'Add the services you already monitor.', icon: 'link' },
+  { title: 'Check the tray', text: 'See build and monitor status while you work.', icon: 'desktop' },
+  { title: 'Get notified', text: 'Get a desktop notification when a status changes.', icon: 'information' },
+] as const;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Barklarm',
+  description,
+  url: Astro.site?.href,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'macOS, Windows, Linux',
+  isAccessibleForFree: true,
+  offers: { '@type': 'Offer', price: 0, priceCurrency: 'EUR' },
+  downloadUrl: releaseUrl,
+  sameAs: repositoryUrl,
+};
+---
+
+<Site {title} {description} {schema}>
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <h1>{title}</h1>
+      <p class="hero-lede">See build status and monitoring alerts in your system tray. Get native notifications when something changes.</p>
+      <div class="actions">
+        <a class="button" href={releaseUrl}><Glyph name="download" /> Download Barklarm</a>
+        <a class="jump-link" href="/docs/quick-start">Quick start <Glyph name="right-arrow" /></a>
+      </div>
+      <p class="free-note">Free and open source</p>
+    </div>
+    <figure class="product">
+      <div class="product-frame">
+        <img
+          src="/img/product/observers.webp"
+          srcset="/img/product/observers-720.webp 720w, /img/product/observers.webp 1440w"
+          sizes="(max-width: 680px) calc(100vw - clamp(44px, 11.6vw, 184px) - 1.7rem), min(42vw, 594px)"
+          width="1440"
+          height="941"
+          alt="Barklarm Observers showing passing, failing, and running example builds"
+          fetchpriority="high"
+        />
+      </div>
+      <figcaption>The Barklarm Observers window</figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap integrations band" id="integrations" aria-labelledby="integrations-title">
+    <h2 id="integrations-title">Connect the tools you already use</h2>
+    <p class="subhead">Choose an integration to see how to set it up.</p>
+    <ul class="integration-list">
+      {integrations.map(({ name, slug, image }) => (
+        <li>
+          <a href={`/docs/configuration/${slug}`}>
+            {image ? <img src={image} alt="" width="32" height="32" /> : <span class="integration-icon"><Glyph name="server" /></span>}
+            <span>{name}</span>
+            <span class="integration-arrow"><Glyph name="right-caret" /></span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap band how" aria-labelledby="how-title">
+    <h2 id="how-title">How it works</h2>
+    <ol class="steps">
+      {steps.map(({ title: heading, text, icon }, i) => (
+        <li>
+          <span class="step-marker" aria-hidden="true">
+            <span>{i + 1}</span><span class="step-icon"><Glyph name={icon} /></span>
+          </span>
+          <div><h3>{heading}</h3><p>{text}</p></div>
+        </li>
+      ))}
+    </ol>
+    <div class="demo" id="demo">
+      <figure>
+        <video {...videoLoading} controls playsinline preload="none" poster="/img/product/promo-poster.webp" width="1280" height="720" aria-label="Barklarm product tour" aria-describedby="demo-description">
+          <source src="/video/barklarm-promo.mp4" type="video/mp4" />
+          <track kind="captions" src="/video/barklarm-promo.vtt" srclang="en" label="English" />
+          <a href="/video/barklarm-promo.mp4">Download the Barklarm product tour</a>
+        </video>
+        <figcaption>Barklarm product tour</figcaption>
+      </figure>
+      <div>
+        <h2>See Barklarm in action</h2>
+        <p id="demo-description">Take a 26-second tour of the Observers window, integrations, and desktop notifications.</p>
+        <a class="jump-link" href="/docs/quick-start">Read the setup guide <Glyph name="right-arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap band questions" aria-labelledby="questions-title">
+    <h2 id="questions-title">Common questions</h2>
+    <dl>
+      <div>
+        <dt>What is Barklarm?</dt>
+        <dd>A desktop app for CI build status and monitoring alerts.</dd>
+      </div>
+      <div>
+        <dt>Which tools does it support?</dt>
+        <dd>GitHub Actions, Azure DevOps, Datadog, Sentry, New Relic, and CCTray are among the <a href="/docs/configuration">supported integrations</a>.</dd>
+      </div>
+      <div>
+        <dt>Is Barklarm free?</dt>
+        <dd>Yes. It’s free and open source on macOS, Windows, and Linux.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="closing" aria-labelledby="closing-title">
+    <div class="wrap">
+      <h2 id="closing-title">Free and open source</h2>
+      <p>Download Barklarm or support its development.</p>
+      <div class="actions">
+        <a class="button" href={releaseUrl}>Download Barklarm</a>
+        <a class="jump-link" href="https://github.com/sponsors/alvarolorentedev">Sponsor on GitHub <Glyph name="external" /></a>
+      </div>
+    </div>
+  </section>
+</Site>
+
+<style>
+  .hero { display: grid; grid-template-columns: 1.04fr 1fr; align-items: center; gap: clamp(1.5rem, 4vw, 4.2rem); padding-block: clamp(3rem, 6vw, 5.2rem) 3rem; }
+  .hero h1 { text-wrap: initial; }
+  .hero-lede { margin-top: 1.25rem; font-size: clamp(1.05rem, 1.75vw, 1.42rem); line-height: 1.47; max-width: 50ch; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem clamp(.85rem, 2vw, 1.65rem); margin-top: 1.7rem; font-size: clamp(1rem, 1.4vw, 1.23rem); }
+  .free-note, figcaption { font-size: clamp(.88rem, 1.2vw, 1.1rem); color: var(--muted); }
+  .free-note { margin-top: .65rem; }
+  .product-frame { background: var(--lavender); border-radius: 16px; padding: clamp(1rem, 2.5vw, 2rem); }
+  .product-frame img { width: 100%; border-radius: 8px; }
+  figcaption { margin-top: .48rem; }
+  .product figcaption { text-align: center; }
+  .band { border-top: 1px solid var(--line); padding-block: clamp(2.25rem, 4vw, 4.25rem); }
+  .subhead { margin-top: .55rem; color: var(--muted); font-size: clamp(1.02rem, 1.65vw, 1.35rem); }
+  .integration-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: .7rem 1rem; margin: 1.55rem 0 0; padding: 0; }
+  .integration-list a { display: flex; align-items: center; gap: .85rem; min-height: 54px; font-size: clamp(1rem, 2vw, 1.42rem); font-weight: 660; }
+  .integration-list img, .integration-icon { width: 36px; height: 36px; object-fit: contain; flex: 0 0 36px; }
+  .integration-list img { padding: 3px; border-radius: 6px; background: light-dark(transparent, #f0e4f4); }
+  .integration-icon { display: grid; place-items: center; color: var(--purple); font-size: 1.75rem; }
+  .integration-arrow, .step-icon { display: none; }
+  .steps { padding: 0; margin: 2rem 0 3.5rem; display: grid; gap: 1.2rem 2rem; grid-template-columns: repeat(3, 1fr); list-style: none; }
+  .step-marker { display: block; color: var(--purple); font-size: 1.65rem; line-height: 1; font-weight: 800; margin-bottom: .5rem; }
+  .steps p, .demo p, .closing p { margin-top: .6rem; font-size: clamp(1.02rem, 1.65vw, 1.32rem); }
+  .demo { display: grid; grid-template-columns: 1.15fr 1fr; align-items: center; gap: clamp(1.1rem, 4vw, 3.2rem); }
+  .demo video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #201e22; border-radius: 10px; border: 1px solid var(--line); }
+  .demo .jump-link { margin-top: .6rem; }
+  .questions { display: grid; grid-template-columns: 1fr 2.9fr; gap: clamp(1.1rem, 4vw, 3.6rem); }
+  .questions h2 { text-wrap: initial; }
+  .questions dl, .questions dd { margin: 0; }
+  .questions dl > div { padding-block: 1rem; border-bottom: 1px solid var(--line); }
+  .questions dl > div:first-child { padding-top: 0; }
+  .questions dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+  .questions dt { font-size: clamp(1.08rem, 1.7vw, 1.35rem); line-height: 1.25; font-weight: 760; margin-bottom: .25rem; }
+  .questions dd { font-size: clamp(1rem, 1.45vw, 1.18rem); }
+  .closing { background: var(--lavender); text-align: center; padding-block: clamp(2.8rem, 5vw, 5rem); }
+  .closing .actions { justify-content: center; }
+  @media (max-width: 840px) {
+    .hero { gap: 1.35rem; }
+    .hero h1 { font-size: clamp(2.42rem, 5.5vw, 3.8rem); }
+  }
+  @media (max-width: 680px) {
+    .hero, .demo, .questions, .steps { grid-template-columns: 1fr; }
+    .hero { padding-block: 1.35rem 1.4rem; }
+    .hero h1 { font-size: clamp(2.15rem, 9.25vw, 3.25rem); }
+    .hero-lede { margin-top: .7rem; }
+    .hero .actions { align-items: flex-start; flex-direction: column; margin-top: 1rem; gap: .12rem; }
+    .hero .jump-link { min-height: 38px; }
+    .free-note { margin-top: 0; }
+    .product-frame { padding: .85rem; }
+    .product-frame img { max-height: 175px; object-fit: cover; object-position: top; }
+    .integration-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 .5rem; margin-top: .6rem; }
+    .integration-list li { border-bottom: 1px solid var(--line); }
+    .integration-list a { color: var(--ink); text-decoration: none; font-size: .91rem; gap: .35rem; }
+    .integration-list a:hover { text-decoration: underline; }
+    .integration-list img, .integration-icon { width: 24px; height: 24px; flex-basis: 24px; }
+    .integration-arrow { display: grid; place-items: center; margin-left: auto; }
+    .integration-icon { font-size: 1.25rem; }
+    .steps { margin-block: 1.2rem 2.25rem; }
+    .steps li { display: flex; align-items: flex-start; gap: .75rem; }
+    .steps p { margin-top: .25rem; }
+    .step-marker { margin: 0; }
+    .step-marker > span:first-child { display: none; }
+    .step-icon { display: grid; place-items: center; border-radius: 9px; width: 37px; height: 37px; background: var(--lavender); font-size: 1.3rem; }
+    .demo > div { grid-row: 1; }
+  }
+</style>

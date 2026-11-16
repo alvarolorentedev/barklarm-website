@@ -1,41 +1,24 @@
-# Website
+# Barklarm website
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+The Barklarm website is a static Astro site with Starlight documentation.
 
-### Installation
+## Develop
 
-```
-$ yarn
-```
+Use Node.js 24 and Python 3.
 
-### Local Development
-
-```
-$ yarn start
+```sh
+npm ci
+npm run dev
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+To test the production build, including Pagefind search:
 
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
+```sh
+npm run build
+npm run check
+npm run preview
 ```
 
-Not using SSH:
+Documentation lives in `src/content/docs/docs`. Blog posts live in `blog`. Public images, video, and other files live in `public`.
 
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+The GitHub Actions workflow checks pull requests and publishes `dist` to GitHub Pages when changes land on `main`. Astro writes individual HTML files so the existing extensionless URLs continue to work on Pages.

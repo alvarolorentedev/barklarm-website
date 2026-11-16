@@ -1,0 +1,30 @@
+---
+import External from '@phosphor-icons/core/bold/arrow-square-out-bold.svg';
+import Arrow from '@phosphor-icons/core/bold/arrow-right-bold.svg';
+import List from '@phosphor-icons/core/bold/list-bold.svg';
+import Download from '@phosphor-icons/core/bold/download-simple-bold.svg';
+import Caret from '@phosphor-icons/core/bold/caret-right-bold.svg';
+import Plugs from '@phosphor-icons/core/bold/plugs-bold.svg';
+import Link from '@phosphor-icons/core/bold/link-bold.svg';
+import Monitor from '@phosphor-icons/core/bold/monitor-bold.svg';
+import Bell from '@phosphor-icons/core/bold/bell-bold.svg';
+
+const icons = {
+  external: External,
+  'right-arrow': Arrow,
+  bars: List,
+  download: Download,
+  'right-caret': Caret,
+  server: Plugs,
+  link: Link,
+  desktop: Monitor,
+  information: Bell,
+};
+
+const { name } = Astro.props as { name: keyof typeof icons };
+const Icon = icons[name];
+---
+<Icon class="glyph" aria-hidden="true" focusable="false" />
+<style>
+  .glyph { width: 1em; height: 1em; flex-shrink: 0; }
+</style>

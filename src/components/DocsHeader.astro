@@ -1,0 +1,32 @@
+---
+import Search from '@astrojs/starlight/components/Search.astro';
+import Brand from './Brand.astro';
+import Glyph from './Glyph.astro';
+import ThemePicker from './ThemePicker.astro';
+import { nav, repositoryUrl } from '../lib/site';
+---
+<div class="docs-header">
+  <Brand />
+  <div class="header-right">
+    <nav aria-label="Main navigation">
+      {nav.map(({ label, href }) => <a href={href} class:list={{ active: label === 'Docs' }}>{label}</a>)}
+    </nav>
+    <Search />
+    <a class="repo" href={repositoryUrl}>GitHub <Glyph name="external" /></a>
+    <ThemePicker />
+  </div>
+</div>
+
+<style>
+  .docs-header, .header-right, nav, .repo { display: flex; align-items: center; }
+  .docs-header { justify-content: space-between; gap: .75rem; height: 100%; }
+  .header-right, nav { gap: clamp(.5rem, 2.25vw, 2rem); }
+  nav a, .repo { color: var(--sl-color-white); text-decoration: none; font-weight: 620; white-space: nowrap; }
+  nav .active { color: var(--sl-color-text-accent); border-bottom: 2px solid; padding-block: .5rem .28rem; }
+  .repo { gap: .25rem; }
+  nav a:hover, .repo:hover { text-decoration: underline; text-underline-offset: .18em; }
+  @media (max-width: 50rem) { nav, .repo { display: none; } }
+  @media (max-width: 380px) {
+    .docs-header, .header-right { gap: .35rem; }
+  }
+</style>

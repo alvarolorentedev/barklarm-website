@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import Site from '../../../layouts/Site.astro';
+import PostList from '../../../components/PostList.astro';
+import { posts } from '../../../lib/blog';
+
+export const getStaticPaths = (async () => {
+  const entries = await posts();
+  const tags = [...new Set(entries.flatMap(({ data }) => data.tags))];
+  return tags.map(tag => ({ params: { tag }, props: { tag, entries: entries.filter(({ data }) => data.tags.includes(tag)) } }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { tag, entries } = Astro.props;
+const title = `${tag.charAt(0).toUpperCase()}${tag.slice(1)} posts`;
+---
+<Site {title} description={`Barklarm blog posts tagged ${tag}.`}>
+  <section class="reading">
+    <nav class="utility-nav" aria-label="Breadcrumb"><a href="/blog">Blog</a><a href="/blog/tags">Tags</a></nav>
+    <h1>{title}</h1>
+    <PostList {entries} />
+  </section>
+</Site>
